@@ -1,0 +1,113 @@
+ <html>
+<head>
+     <script src="https://kit.fontawesome.com/2dc9db757c.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="css/style.css">
+     <style>
+      body {
+        background-image: url('https://tse2.mm.bing.net/th?id=OIP.MaBeEDu5WMJ40McBrjZKTwHaEK&pid=Api&P=0');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      </style>
+</head>
+        <h1 class = "heading1" >TODO APP</h1>
+            <br>
+<form action="/add-data" method = "post">
+<table class="table" align="center">
+          <tr class="row1">
+          <th style="font-size: 25;padding-right: 20;"id="cat"><i class="fa-solid fa-pencil"></i>Description  </th>
+          <th style="font-size: 25;padding-right: 20;" ><i class="fa-regular fa-object-ungroup"></i>Category </th>
+          <th style="font-size: 25;padding-right: 20;"><i class="fa-regular fa-calendar-days"></i>Date  </th>
+          <th style="font-size: 25;padding-right: 20;"><i class="fa-regular fa-calendar-days"></i>Time  </th>
+
+          <br>
+      </tr>
+      <tr class="row2">
+           <td style="padding-right: 15;"><input style="height: 30px;width: 200px;font-size: 20px;" type="text" name = "description" placeholder="Enter description" required></td>
+          
+          <td style="padding-right: 15;">
+              <select  style="height: 30px;width: 200px;font-size: 20px;"name="category" id="category">
+                  <option value = "category">category</option>
+                  <option value="personal">personal</option>
+                  <option value="work">work</option>
+                  <option value="school">school</option>
+                  <option value="Project">Project</option>
+                  <option value="other">other</option>
+                </select>
+              
+          </td>
+          <td> <input   style="height: 30px;width: 200px;font-size: 20px" type="Date" name = "duedate" placeholder = "enter date" id="date"></td>
+          <td> <input   style="height: 30px;width: 200px;font-size: 20px" type="time" name = "duetime" placeholder = "enter time" id="time"></td>
+
+          <!-- <td style="padding-right: 15;"><input style="height: 30px;width: 200px;font-size: 20px;" type="text" name = "duedate" placeholder="Enter duedate" required></td> -->
+        </td>
+      </tr>
+      </table><br><br>
+<br><button class="button" style="color: white;font-size: large;"><i class="fa-solid fa-plus" style="color: white;"></i> ADD TASKS</button>
+<br><br><br>    
+
+</form>
+<div class="box2">
+      <form action="delete-data" method="get">
+        <ul>
+          <h1 align="center"><i class="fa-solid fa-list-check"></i> TASKS LIST</h1>
+          <hr style="width:36.1%;text-align:left;margin-left:33%;height:3px;border-width:0;color:black;background-color:black">
+          <br>
+            <table class="table2">
+              
+                <tr class="row3">
+                  <th style="font-size: 25;padding-right: 35;">Check</th>
+                  <th style="font-size: 25;padding-right: 35;">Description</th>
+                  <th style="font-size: 25;padding-right: 35;">Category</th>
+                <th style="font-size: 25;padding-right: 35;">Due date</th>
+                <th style="font-size: 25;padding-right: 35;">Due time</th>
+
+                </tr>
+                <td colspan="5">
+                  <hr style="height:3px;border-width:0;color:gray;background-color:gray;text-align:left;margin-left:0;">
+              </td>
+                <% for(let i of data) { %>
+                    <tr class="row4">
+                      
+                      <td style="font-size: 20;"> <input  style="height: 20px;width: 20px;"type="checkbox" name="<%= i._id %>" ></td>
+                      <td style="font-size: 20;"> <p><%= i.description %> <sub>
+                       
+                      
+                      </sub></p></td>
+                     
+                      </td>
+                      <td style="font-size: 20;"> <% if((i.category) == "category"){%>
+                        <div> <button style="background-color:rgb(40, 203, 212); width: 70px; height: 40px;">No Category</button></div>
+                       <%} else{%>
+                        <div><button style="background-color: rgb(248, 147, 164); width: 70px; height: 30px;"><%= i.category %></button></div>
+                        <%}%></td>
+                      <td style="font-size: 20;"> <% if((i.duedate) == ""){%>
+                        <div>
+                          <p>No Deadline</p> </div>
+                       <%}else{%>
+                        <div><%= i.duedate %></div>
+                       
+                        <%}%></td>
+                        <div><td style="font-size: 20;"><% if((i.duetime) == ""){%>
+                          <div>
+                            <p>No Time</p> </div>
+                         <%}else{%>
+                          <div><%= i.duetime %></div>
+                         
+                          <%}%>
+                        </div>
+                    </tr>
+                    <td colspan="5">
+                    <hr style="height:1px;border-width:0;">
+                </td>
+                <% } %>
+            </table>
+           
+            <br>
+            <button type="submit" class="delete" style="color: white; font-size: large;"><i class="fa-solid fa-trash" style="color: white
+            ;"></i>  DELETE TASKS</button>
+        </ul>
+     </form>      
+    </div>
+</body>
+</html>
